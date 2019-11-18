@@ -13,7 +13,7 @@ void sha1_transform_fast(uint32_t *sha1_state, uint32_t *data_block);
 static int process_file(int filno, char *name)
 {
 	struct sha1_ctx ctx;
-	uint8_t buffer[0x1000], *p;
+	uint8_t buffer[64];
 	uint8_t md[20];
 	size_t i;
 
@@ -24,15 +24,10 @@ static int process_file(int filno, char *name)
 			return -1;
 		}
 
-		p = buffer;
-		while (i >= 64) {
-			sha1_transform_amd64(ctx.state, (uint32_t *) p);
-			ctx.data_counter += 64;
-			p += 64, i -= 64;
-		}
+		sha1_update(&ctx, buffer, i);
 	}
 
-	sha1_final(&ctx, md, buffer, i);
+	sha1_final(&ctx, md);
 
 	for (i = 0; i < 20; ++i) {
 		printf("%02x", md[i]);
