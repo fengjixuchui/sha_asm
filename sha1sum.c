@@ -13,7 +13,7 @@ void sha1_transform_fast(uint32_t *sha1_state, uint32_t *data_block);
 static int process_file(int filno, char *name)
 {
 	struct sha1_ctx ctx;
-	uint8_t buffer[64];
+	uint8_t buffer[0x1000];
 	uint8_t md[20];
 	size_t i;
 
