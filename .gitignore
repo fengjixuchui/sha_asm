@@ -1,2 +1,3 @@
 *.o
-sha1sum
+*.a
+app/sha1sum

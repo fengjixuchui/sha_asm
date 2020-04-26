@@ -1,4 +1,4 @@
-/* SHA1 implementation */
+/* SHA-1 command line tool */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -6,9 +6,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "sha1.h"
-
-void sha1_transform_amd64(uint32_t *sha1_state, uint32_t *data_block);
-void sha1_transform_fast(uint32_t *sha1_state, uint32_t *data_block);
 
 static int process_file(int filno, char *name)
 {
